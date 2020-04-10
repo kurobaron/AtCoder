@@ -1,0 +1,22 @@
+Question.A
+l = list(map(int, input().split()))
+print("{0} {1} {2}".format(l[2], l[0], l[1]))
+
+Question.B
+N, M = map(int, input().split())
+A = list(map(int, input().split()))
+for i in range(N-1):
+  for j in range(i+1):
+    if A[i+1-j] > A[i-j]:
+      a = A[i-j]
+      A[i-j] = A[i+1-j]
+      A[i+1-j] = a
+ 
+S = 0
+for i in range(N):
+  S += A[i]
+ 
+if A[M-1] < float(S)/(4.0*float(M)):
+  print("No")
+else:
+  print("Yes")
