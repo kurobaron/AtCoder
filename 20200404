@@ -20,3 +20,16 @@ if A[M-1] < float(S)/(4.0*float(M)):
   print("No")
 else:
   print("Yes")
+
+Question.C
+N, K = map(int, input().split())
+r = N%K
+if r == 0 or r == 1:
+  print(r)
+else:
+  s = abs(r - K)
+  if s < r:
+    print(s)
+  else:
+    print(r)
+
