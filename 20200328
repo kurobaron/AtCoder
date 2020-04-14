@@ -1,0 +1,29 @@
+Question.A
+tmp = input()
+S = [0]*6
+for i in range(6):
+  S[i] = tmp[i]
+if S[2] == S[3] and S[4] == S[5]:
+  print('Yes')
+else:
+  print('No')
+
+Question.B
+X = int(input())
+h1 = X//500
+h2 = X%500 - X%500%5
+print(h1*1000 + h2)
+
+Question.C
+K, N = map(int, input().split())
+A = list(map(int, input().split()))
+
+dmax = K - A[N-1] + A[0]
+apre = -(K - A[N-1])
+for a in A:
+  d = a - apre
+  if d > dmax:
+    dmax = d
+  apre = a
+
+print(K - dmax)
