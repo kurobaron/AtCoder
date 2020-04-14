@@ -27,3 +27,17 @@ for a in A:
   apre = a
 
 print(K - dmax)
+
+Question.D__WA
+N, X, Y = map(int, input().split())
+
+r = [[0]*2]*(N-1)
+for i in range(N-1):
+  r[i][0] = i+1
+  if i == X-1:
+    r[i][1] = Y-1
+
+rs = []
+for k in range(N-1):
+  for e in range(N):
+    for i in range(1,k+1):
