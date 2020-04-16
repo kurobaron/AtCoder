@@ -37,13 +37,18 @@ for i in range(N):
   r[i][0] = i
   if i == X-1:
     r[i][1] = Y-1
+  if i == Y-1:
+    r[i][1] = -1
 
-def exp(k, i, leng, r, cnt=0):
+def exp(k, i, leng, r, cnt=0, flg=0):
   if k == cnt:
-    return 1
+    if r[i][1] == -1 and flg == 0: 
+      return 0
+    else:
+      return 1
   cnt += 1
   if r[i][1] != 0:
-    b = exp(k, r[i][1], leng, r, cnt)
+    b = exp(k, r[i][1], leng, r, cnt, flg=1)
   else:
     b = 0
   i += 1
