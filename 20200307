@@ -1,0 +1,32 @@
+Question.A
+S = input()
+if S == "AAA" or S == "BBB":
+  print("No")
+else:
+  print("Yes")
+
+Question.B
+N, A, B = list(map(int, input().split()))
+r = N%(A+B)
+if r > A:
+  r = A
+print(N//(A+B)*A + r)
+
+Question.C
+A, B = list(map(int, input().split()))
+
+l8 = []
+l10 = []
+for i in range(100):
+  p8 = round((A+0.01*i)/0.08, 10)
+  p10 = round((B+0.01*i)/0.1, 10)
+  if p8.is_integer():
+    l8.append(p8)
+  if p10.is_integer():
+    l10.append(p10)
+
+p = sorted(list(set(l8) & set(l10)))
+if p == []:
+  print(-1)
+else:
+  print(int(p[0]))
