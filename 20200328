@@ -28,38 +28,43 @@ for a in A:
 
 print(K - dmax)
 
-Question.D__WA
+Question.D_WA
 N, X, Y = map(int, input().split())
 
-r = []
+r = [0]*N
 for i in range(N):
-  r.append([0,0])
-  r[i][0] = i
   if i == X-1:
-    r[i][1] = Y-1
+    r[i] = Y-1
   if i == Y-1:
-    r[i][1] = -1
+    r[i] = -1
 
 def exp(k, i, leng, r, cnt=0, flg=0):
-  if k == cnt:
-    if r[i][1] == -1 and flg == 0: 
+  if r[i] < 0:
+    if flg == 1:
       return 0
-    else:
-      return 1
+  if k == cnt:
+    if flg == 1:
+      if i+1 <= int((X+Y)/2.0):
+        return 1
+      else:
+        return 0
+    return 1
   cnt += 1
-  if r[i][1] != 0:
-    b = exp(k, r[i][1], leng, r, cnt, flg=1)
+  if r[i] > 0:
+    return exp(k, i+1, leng, r, cnt, flg=1) + exp(k, r[i], leng, r, cnt, flg) 
   else:
-    b = 0
-  i += 1
-  if i+1 > leng:
-    return 0
-  return exp(k, i, leng, r, cnt) + b
+    if i+1 > leng-1:
+      return 0
+    return exp(k, i+1, leng, r, cnt, flg)
 
-print(r)
 l = N
 for k in range(1, N):
   tmp = 0
   for i in range(N):
     tmp += exp(k, i, l, r)
   print(tmp)
+
+
+
+
+
