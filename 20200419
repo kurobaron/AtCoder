@@ -1,0 +1,24 @@
+Question.A
+import math
+R = float(input())
+print(round(2*R*math.pi, 3))
+
+Question.B
+N, M = list(map(int, input().split()))
+A = list(map(int, input().split()))
+tmp = 0
+for i in range(M):
+  tmp += A[i]
+if N >= tmp:
+  print(N - tmp)
+else:
+  print(-1)
+
+Question.C
+N = int(input())
+A = list(map(int, input().split()))
+li = [0]*N
+for e in A:
+  li[e-1] += 1
+for i in range(N):
+  print(li[i])
