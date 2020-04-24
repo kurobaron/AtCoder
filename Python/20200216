@@ -1,0 +1,34 @@
+Question.A
+A, B, C = list(map(int, input().split()))
+if (A==B or B==C or C==A) and not (A==B==C):
+  print('Yes')
+else:
+  print('No')
+
+Question.B
+N = int(input())
+A = list(map(int, input().split()))
+for i in range(len(A)):
+  if A[i]%2 == 0:
+    if A[i]%3 != 0 and A[i]%5 != 0:
+      A[i] = 0
+if 0 in A:
+  print('DENIED')
+else:
+  print('APPROVED')
+
+Question.C
+from collections import defaultdict
+N = int(input())
+li = []
+d = defaultdict(int)
+for i in range(N):
+  s = input()
+  d[s] += 1
+e = max(d, key=d.get)
+li.append(e)
+n = d.pop(e)
+tmp = [k for k, v in d.items() if v == n]
+li += tmp
+li.sort()
+print('\n'.join(li))
