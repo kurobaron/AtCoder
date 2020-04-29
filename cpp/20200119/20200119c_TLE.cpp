@@ -35,5 +35,6 @@ int main(void){
 		}
 	}
 	cout << cnt << "\n";
+	free(P);
 	return 0;
 }
