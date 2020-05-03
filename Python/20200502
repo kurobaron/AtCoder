@@ -1,0 +1,75 @@
+Question.A
+K = int(input())
+A, B = list(map(int, input().split()))
+tmp = 0
+while(True):
+  tmp += K
+  if A<= tmp <=B:
+    print("OK")
+    break
+  elif tmp > B:
+    print("NG")
+    break
+
+Question.B
+import math
+X = int(input())
+m = 100.0
+y = 0
+while(True):
+  m = math.floor(m*1.01)
+  y += 1
+  if m >= X:
+    print(y)
+    break
+
+Question.C
+N, M, Q = list(map(int, input().split()))
+a = [0]*Q
+b = [0]*Q
+c = [0]*Q
+d = [0]*Q
+for i in range(Q):
+  a[i], b[i], c[i], d[i] = list(map(int, input().split()))
+li = [1]*11
+ans = 0
+
+def countup(l, n, m):
+  l[n] += 1
+  if l[n] > m:
+    if n == 0:
+      return
+    countup(l, n-1, m)
+    l[n] = l[n-1]
+  return
+
+while(li[0]==1):
+  pt = 0
+  for i in range(Q):
+    if (li[b[i]]-li[a[i]]==c[i]):
+      pt += d[i]
+  ans = max(ans, pt)
+  countup(li, N, M)
+
+print(ans)
+
+Question.D_WA
+A, B, N = list(map(int, input().split()))
+
+if B==1:
+  print(0)
+
+tb = B - 1
+tp_pre = 0
+while(True):
+  tp = (A*tb)//B - A*(tb//B)
+  if tp > tp_pre:
+    tp_pre = tp
+  tb += B
+  if tb > N:
+    break
+
+if (B > N):
+  print((A*N)//B - A*(N//B))
+else:
+  print(int(tp_pre))
