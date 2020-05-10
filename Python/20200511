@@ -1,0 +1,52 @@
+Question.A
+S = input()
+T = input()
+if len(T)==len(S)+1 and S==T[:len(S)]:
+  print('Yes')
+else:
+  print('No')
+
+Question.B
+A,B,C,K = list(map(int, input().split()))
+tmp = K-A
+if tmp>0:
+  tmp -= B
+  if tmp>0:
+    ans = 1*A-1*(K-A-B)
+  else:
+    ans = 1*A
+else:
+  ans = 1*K
+print(ans)
+
+Question.C
+
+Question.D
+N,K = list(map(int, input().split()))
+A = list(map(int, input().split()))
+c = [0]*N
+
+idx = 0
+stp = 0
+ans = 0
+while(True):
+  stp += 1
+  idx = A[idx] - 1
+  if c[idx]==0 and idx!=0:
+    c[idx] = stp
+  else:
+    tmp1 = c[idx]
+    tmp2 = stp - tmp1
+    break
+  if stp>=K:
+    ans = idx + 1
+    break
+
+if(ans>0):
+  print(ans)
+else:
+  k1 = K - tmp1
+  k2 = k1%tmp2
+  for _ in range(k2):
+    idx = A[idx] - 1
+  print(idx+1)
