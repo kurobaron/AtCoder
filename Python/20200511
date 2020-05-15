@@ -20,6 +20,21 @@ else:
 print(ans)
 
 Question.C
+N,M,X = map(int, input().split())
+A = [list(map(int, input().split())) for _ in range(N)]
+
+ans = float('inf')
+for i in range(1<<N):
+  tmp = [0]*(M+1)
+  for j in range(N):
+    if i&(1<<j)==0: continue
+    for k,l in enumerate(A[j]):
+      tmp[k] += l
+  if all(e>=X for e in tmp[1:]):
+    ans = min(ans, tmp[0])
+if ans==float('inf'):
+  ans = -1
+print(ans)
 
 Question.D
 N,K = list(map(int, input().split()))
