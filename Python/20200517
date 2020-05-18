@@ -1,0 +1,30 @@
+Question.A
+N = int(input())
+r = N%10
+if r==2 or r== 4 or r==5 or r==7 or r==9:
+  print('hon')
+elif r==0 or r==1 or r==6 or r==8:
+  print('pon')
+else:
+  print('bon')
+
+Question.B
+K = int(input())
+S = input()
+if len(S)<=K:
+  print(S)
+else:
+  print(S[:K]+'...')
+
+Question.C
+import math
+A,B,H,M = map(int, input().split())
+m = 60*H+M
+degA = 0.5*m 
+degB = (6*m)%360
+xa = A*math.sin(math.radians(degA))
+ya = A*math.cos(math.radians(degA))
+xb = B*math.sin(math.radians(degB))
+yb = B*math.cos(math.radians(degB))
+ans = math.sqrt((xa-xb)**2+(ya-yb)**2)
+print(ans)
