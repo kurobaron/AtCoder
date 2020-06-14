@@ -1,0 +1,48 @@
+Question.A
+x = list(map(int, input().split()))
+for i in range(len(x)):
+  if x[i]==0:
+    print(i+1)
+
+Question.B
+x, y = map(int, input().split())
+if (y-2*x<0 or (y-2*x)%2!=0) or (4*x-y<0 or (4*x-y)%2!=0):
+  print("No")
+else:
+  print("Yes")
+
+Question.C
+x, n = map(int, input().split())
+p = list(map(int, input().split()))
+
+def search(x, li):
+  for i in range(int(len(li)/2)+2):
+    if x-i not in li:
+      print(x-i)
+      return
+    if x+i not in li:
+      print(x+i)
+      return
+  return
+
+search(x, p)
+
+Question.D
+n = int(input())
+a = list(map(int, input().split()))
+a.sort()
+dp = [0]*(1000000+1)
+cnt = 0
+for i in range(len(a)):
+  if dp[a[i]]==1:
+    continue
+  j = 2
+  while(a[i]*j<=a[-1]):
+    dp[a[i]*j] = 1
+    j += 1
+  if i!=len(a)-1 and a[i+1]==a[i]:
+    dp[a[i]] = 1
+    continue
+  cnt += 1
+  dp[a[i]] = 1
+print(cnt)

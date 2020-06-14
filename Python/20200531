@@ -1,0 +1,70 @@
+Question.A
+a,b = map(int, input().split())
+print(a*b)
+
+Question.B
+n = int(input())
+li = list(map(int, input().split()))
+ans = 1
+flg = 0
+for i in range(n):
+  if flg==1 and li[i]!=0:
+    continue
+  elif li[i]==0:
+    ans = 0
+    break
+  else:
+    ans *= li[i]
+  if(ans>1000000000000000000):
+    flg = 1
+if flg==1 and ans==0:
+  print(ans)
+elif flg==1:
+  print(-1)
+else:
+  print(ans)
+
+Question.C
+from decimal import Decimal as dc
+a,b = map(dc, input().split())
+print(int(a*b))
+
+Question.D
+n = int(input())
+li = []
+flg = 0
+for i in range(1000000):
+  if n==1:
+    break
+  if i==0 or i==1 or n%i!=0:
+    continue
+  j = i
+  cnt = 0
+  while(n%j==0):
+    if flg==0:
+      flg = 1
+    n /= j
+    cnt += 1
+  li.append(cnt)
+if flg==0 and n!=1:
+  print(1)
+elif flg==0 and n==1:
+  print(0)
+elif n==1:
+  ans = 0
+  for e in li:
+    i = 1
+    while(e-i>=0):
+      e -= i
+      i += 1
+      ans += 1
+  print(ans)
+else:
+  ans = 1
+  for e in li:
+    i = 1
+    while(e-i>=0):
+      e -= i
+      i += 1
+      ans += 1
+  print(ans)
