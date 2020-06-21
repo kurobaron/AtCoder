@@ -1,0 +1,56 @@
+Question.A
+al = input()
+if al.isupper():
+  print('A')
+else:
+  print('a')
+
+Question.B
+n,k = map(int, input().split())
+p = list(map(int,input().split()))
+cnt = 0
+ans = 0
+for e in sorted(p):
+  ans += e
+  cnt += 1
+  if cnt==k:
+    break
+print(ans)
+
+Question.C
+import math
+n = int(input())
+ans = []
+tmp = n
+cnt = 1
+r = 0
+for i in range(1, 11):
+  tmp -= pow(26, i)
+  if tmp <= 0:
+    break
+  cnt += 1
+  r += pow(26, i)
+idx = n - r
+now = 0
+while(cnt!=1):
+  cnt -= 1
+  j = 1
+  while(1):
+    now += pow(26, cnt)
+    if idx <= now:
+      now -= pow(26, cnt)
+      ans.append(j)
+      break
+    else:
+      j += 1
+k = 0
+while(1):
+  if now+k==idx-1:
+    ans.append(k+1)
+    break
+  else:
+    k += 1
+anstr = ''
+for e in ans:
+  anstr += chr(e+96)
+print(anstr)
