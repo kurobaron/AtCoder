@@ -1,0 +1,27 @@
+Question.A
+n,x,t = map(int, input().split())
+if n%x==0:
+  print(t*(n//x))
+else:
+  print(t*(n//x)+t)
+
+Question.B
+n = input()
+val = 0
+for i in range(len(n)):
+  val += int(n[i])
+if val%9==0:
+  print("Yes")
+else:
+  print("No")
+
+Question.C
+n = int(input())
+a = list(map(int, input().split()))
+ans = 0
+ref = 0
+for i in range(len(a)):
+  if a[i]<ref:
+    ans += ref - a[i]
+  ref = max(ref, a[i])
+print(ans)

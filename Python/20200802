@@ -1,0 +1,36 @@
+Question.A
+x = int(input())
+if x>=30:
+  print("Yes")
+else:
+  print("No")
+
+Question.B
+import math
+n,d = map(int, input().split())
+cnt = 0
+for _ in range(n):
+  x,y = map(int, input().split())
+  if math.sqrt(x**2+y**2)<=d:
+    cnt += 1
+print(cnt)
+
+Question.C
+k = int(input())
+if k==1 or k==7:
+  print(1)
+elif k%2==0:
+  print(-1)
+else:
+  cnt = 1
+  pre = 7
+  while(True):
+    surp = (pre*10+7)%k
+    cnt += 1
+    if surp==0:
+      break
+    if cnt>1000000:
+      cnt = -1
+      break
+    pre = surp
+  print(cnt)

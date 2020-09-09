@@ -1,0 +1,40 @@
+Question.A
+S = input()
+if S=="RRR":
+  print(3)
+elif S=="RRS" or S=="SRR":
+  print(2)
+elif S=="SSS":
+  print(0)
+else:
+  print(1)
+
+Question.B
+n = int(input())
+li = list(map(int, input().split()))
+ans = 0
+for i in range(len(li)-2):
+  for j in range(i+1,len(li)-1):
+    for k in range(j+1,len(li)):
+      a = li[i]
+      b = li[j]
+      c = li[k]
+      if a==b or b==c or c==a:
+        continue
+      if a+b>c and b+c>a and c+a>b:
+        ans += 1
+print(ans)
+
+Question.C
+x, k, d = map(int, input().split())
+if x<0:
+  x*=-1
+if x>=k*d:
+  print(x-k*d)
+else:
+  quo = x//d
+  sur = x%d
+  if (k-quo)%2==0:
+    print(sur)
+  else:
+    print(d-sur)
