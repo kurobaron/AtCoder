@@ -1,0 +1,93 @@
+Question.A
+S = input()
+T = input()
+if S=='Y':
+  print(str.upper(T))
+else:
+  print(T)
+
+Question.B
+H,W = map(int, input().split())
+S = []
+ans = 0
+for i in range(H):
+  S.append(list(input()))
+for i in range(H):
+  for j in range(W):
+    if S[i][j]=='.':
+      if j!=0 and S[i][j-1]=='.':
+        ans += 1
+      if i!=0 and S[i-1][j]=='.':
+        ans += 1
+print(ans)
+
+Question.C
+N = int(input())
+p = list(map(int, input().split()))
+isUsed = [False]*200001
+m = 0
+for i in range(N):
+  isUsed[p[i]]=True
+  if p[i]==m:
+    while isUsed[m]:
+      m += 1
+  print(m)
+
+Question.D
+T = int(input())
+MOD = 1000000007
+li = []
+for i in range(T):
+  N,A,B = map(int, input().split())
+  ans = (pow(N-A+1,2)*pow(N-B+1,2))%MOD
+  num = ((N-A+1)*(N-B+1))%MOD
+  if N-A-B>=0:
+    num = (num-2*(N-A-B+2)*(N-A-B+1)//2)%MOD
+  ans = (ans-pow(num,2))%MOD
+  li.append(ans)
+for i in range(T):
+  print(li[i])
+
+Question.E_TLE
+H,W = map(int, input().split())
+S = []
+K = 0
+MOD = 1000000007
+U = [[0]*W for i in range(H)]
+D = [[0]*W for i in range(H)]
+L = [[0]*W for i in range(H)]
+R = [[0]*W for i in range(H)]
+for i in range(H):
+  S.append(list(input()))
+for i in range(H):
+  for j in range(W):
+    if S[i][j]=='#':
+      continue
+    K += 1
+    if i>0:
+      D[i][j] = D[i-1][j] + 1
+    else:
+      D[i][j] = 1
+    if j>0:
+      R[i][j] = R[i][j-1] + 1
+    else:
+      R[i][j] = 1
+for i in range(H)[::-1]:
+  for j in range(W)[::-1]:
+    if S[i][j]=='#':
+      continue
+    if i<H-1:
+      U[i][j] = U[i+1][j] + 1
+    else:
+      U[i][j] = 1
+    if j<W-1:
+      L[i][j] = L[i][j+1] + 1
+    else:
+      L[i][j] = 1
+ans = K*pow(2,K)
+for i in range(H):
+  for j in range(W):
+    if S[i][j]=='#':
+      continue
+    ans -= pow(2,K-(U[i][j]+D[i][j]+R[i][j]+L[i][j]-4+1))
+print(ans%MOD)

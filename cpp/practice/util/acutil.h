@@ -126,6 +126,52 @@ namespace atcoder{
 	};
 
 
+	struct SegmentTree{
+		long long N = 1;
+		SegmentTree(long long n=1e5){
+			while(n>N) N *= 2;
+			tree = vector<long long>(2*N-1);
+		}		
+
+		void Update(long long i, long long x, bool isMax=true){
+			//i+1枚目の葉の値をxに更新する
+			i = N-1+i;
+			tree.at(i) = x;
+			while(i>0){
+				i = (i-1)/2;
+				if(isMax) tree.at(i) = max(tree.at(i*2+1),tree.at(i*2+2));
+				else tree.at(i) = min(tree.at(i*2+1),tree.at(i*2+2));
+			}
+		}
+
+		long long Search(long long a, long long b, bool isMax=true){
+			//[a,b)の範囲における最大値または最小値を返す
+			if(b<=0||a>=N) return isMax ? -1 : INF; 
+			else{
+				if(isMax) return max(Search(a,b,isMax,0*2+1,0,(0+N)/2), Search(a,b,isMax,0*2+2,(0+N)/2,N));
+				else return min(Search(a,b,isMax,0*2+1,0,(0+N)/2), Search(a,b,isMax,0*2+2,(0+N)/2,N));
+			}
+		}
+
+		
+
+	private:
+		vector<long long> tree;
+		const long long INF = 1e18;
+
+		long long Search(long long a, long long b, bool isMax, long long k, long long l, long long r){
+			//オーバーロード
+			//[a,b)の範囲における最大値または最小値を返す
+			if(b<=l||a>=r) return isMax ? -1 : INF; 
+			if(a<=l&&r<=b) return tree.at(k);
+			else{
+				if(isMax) return max(Search(a,b,isMax,k*2+1,l,(l+r)/2), Search(a,b,isMax,k*2+2,(l+r)/2,r));
+				else return min(Search(a,b,isMax,k*2+1,l,(l+r)/2), Search(a,b,isMax,k*2+2,(l+r)/2,r));
+			}
+		}
+	};
+
+
 
 	struct Sieve{
 		Sieve(long long n=1e5+1) : isPrime(n,1),factor(n,1){
@@ -178,5 +224,35 @@ namespace atcoder{
 			a = t;
 		}
 		return a;
+	}
+	
+
+	//行列の積m1*m2を返す
+	vector<vector<long long>> MatMal(vector<vector<long long>> &m1, vector<vector<long long>> &m2, long long r/*=m1の行*/, long long c/*=m2の列*/, long long h/*=m1の列,m2の行*/){
+		long long i,j,k,elem,MOD = 1e9+7;
+		vector<vector<long long>> matp(r, vector<long long>(c));
+		for(i=0;i<r;++i){
+			for(j=0;j<c;++j){
+				elem = 0;
+				for(k=0;k<h;++k){
+					elem += m1.at(i).at(k)*m2.at(k).at(j);
+					elem %= MOD;
+				}
+				matp.at(i).at(j) = elem;
+			}
+		}
+		return matp;
+	}
+				
+
+	//n*nの行列mのp乗を返す
+	vector<vector<long long>> MatPow(vector<vector<long long>> &m, long long p, long long n){
+		long long i,j,k,MOD = 1e9+7;
+		vector<vector<long long>> m_p;
+		if(p==1) return m;
+		m_p = matpow(m, p/2, n);
+		m_p = matmal(m_p, m_p, n, n, n);
+		if(p%2==0) return m_p;
+		else return matmal(m_p, m, n, n, n);
 	}
 }
